@@ -1,0 +1,67 @@
+﻿<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    {% load static %}
+    <link href="{% static 'polls/css/Navbar.css' %}" rel="stylesheet" type="text/css">
+
+    <title>{% block title %} {% endblock %}</title>
+    {% block head %} {% endblock %}
+</head>
+<body>
+    <!--    Navbar    -->
+    <div class = 'navbar'>
+    	<ul class = 'nav'>
+
+
+    		<li class = 'navITEM'>
+    			<a href="{% url 'news' %}">Новости</a>
+    		</li>
+
+            <li class = 'navITEM'>
+    			<a href="{% url 'create_news' %}">Добавить новость</a>
+    		</li>
+
+    		<li class = 'navITEM'>
+    			<a href="{% url 'about' %}">О проекте</a>
+    		</li>
+
+            <li class = 'navITEM'>
+                {% if user.is_authenticated %}
+                    <span class="username">{{ user.username }}</span>
+                    <!-- PROFILE MENU -->
+                    <div class = 'profMenu'>
+                        <!-- Не забудь удалить Placeholder-->
+                        <div class = 'Name_avatar'>
+                            <img src = "{% static 'img/test.jpeg' %}">
+                            <span>{{ user.username }}</span>
+                        </div>
+                        <!-- <img class = 'icon'> -->
+			            <a href="{% url 'account_profile' %}" >Профиль</a> <br>
+                        <a href="{% url 'account_logout' %}">Выйти</a>
+                    </div>
+    			    
+                {% else %}
+
+                <a href="{% url 'account_login' %}">Войти</a>
+                {% endif %}
+                    
+    		</li>
+    	</ul>
+    </div>
+
+    <div class='Empty_Wrapper'></div>
+
+    <!-- Future Packages
+        style = 'color: blue;'
+        <span class = 'line'></span>
+    -->
+
+    <script type="text/javascript" src= "{% static 'polls/js/mini-scripts/mini-profile.js' %}"></script>
+    <script type="text/javascript" src="{% static 'polls/js/jquery-1.12.3.min.js' %}"></script>
+
+    <!--    END Navbar    -->
+    {% block body %} {% endblock %}
+
+</body>
+</html>

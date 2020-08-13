@@ -1,0 +1,23 @@
+{% extends 'polls/Navbar.html' %}
+
+
+{% block title %} Добавить новость {% endblock %}
+
+{% block head %}
+    {% load static%}
+    <link type = 'text/css' href={% static 'polls/css/general/main.css'%} rel = 'stylesheet'>
+{% endblock %}
+
+{% block body %}
+    {% if user.is_authenticated %}
+        <h1>Create Post Page</h1>
+        <form method="post" enctype="multipart/form-data">
+          {% csrf_token %}
+          {{ form.as_p }}
+          <button type="submit">Submit New Post</button>
+        </form>
+    {% else %}
+        <h1>Вы не зарегестрированны,пожалуйста зарегестрируйтесь или войдите!</h1>
+        <a href="{% url 'account_login' %}">Войти</a>
+    {% endif %}
+{% endblock %}
